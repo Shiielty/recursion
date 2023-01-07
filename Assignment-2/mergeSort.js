@@ -1,19 +1,4 @@
-arr = [1, 9, 17]
-anotherArr = [8, 15]
-
-function split(array) {
-  const n = array.length;
-  console.log(n);
-
-  const halfLength = Math.ceil(n/2);
-  console.log(halfLength)
-
-  const firstHalf = array.slice(0, halfLength);
-  console.log(firstHalf)
-
-  const secondHalf = array.slice(halfLength-1, -1);
-  console.log(secondHalf);
-}
+arr = [1, 4, 1001, 17, 3, 7, 107, 38, 15, 17, 3, 7, 1, 73, 15]
 
 function merge(array1, array2) {
   const len1 = array1.length;
@@ -23,7 +8,7 @@ function merge(array1, array2) {
   let i = 0, j=0;
 
   while (i < len1 && j < len2) {
-    array1[i] < array2[i] 
+    array1[i] < array2[j] 
     ? result.push(array1[i++]) 
     : result.push(array2[j++]);
   }
@@ -38,6 +23,16 @@ function merge(array1, array2) {
   return result;
 }
 
-// split(arr);
+function mergeSort(array) {
+  if (array.length === 1) {
+    return array;
+  } else {
+    const halfLength = Math.ceil(array.length/2);
+    const firstHalf = mergeSort(array.splice(0, halfLength));
+    const secondHalf = mergeSort(array.splice(-halfLength));
+  
+    return merge(firstHalf, secondHalf);
+  }
+}
 
-console.log(merge(arr, anotherArr))
+console.log(mergeSort(arr))
